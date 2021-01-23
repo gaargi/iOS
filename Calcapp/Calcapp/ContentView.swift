@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var result = ""
+    
     var body: some View {
         
         VStack {
@@ -23,46 +26,55 @@ struct ContentView: View {
             
             Spacer()
             
+            Text(result)
+                .padding(28)
+                .background(Color.white)
+                .foregroundColor(.pink)
+                .border(Color.pink, width: 11)
+                .font(.title)
+                .cornerRadius(15)
+                .padding()
+            
             VStack {
                 HStack {
-                    calculatorButton(number: "1")
-                    calculatorButton(number: "2")
-                    calculatorButton(number: "3")
-                    calculatorButton(number: "-")                }
+                    calculatorButton(symbol: "1")
+                    calculatorButton(symbol: "2")
+                    calculatorButton(symbol: "3")
+                    calculatorButton(symbol: "-")
+                }
                 HStack {
                     
-                    calculatorButton(number: "4")
-                    calculatorButton(number: "5")
-                    calculatorButton(number: "6")
-                    calculatorButton(number: "+")                }
+                    calculatorButton(symbol: "4")
+                    calculatorButton(symbol: "5")
+                    calculatorButton(symbol: "6")
+                    calculatorButton(symbol: "+")
+                }
                 HStack {
-                    calculatorButton(number: "7")
-                    calculatorButton(number: "8")
-                    calculatorButton(number: "9")
-                    calculatorButton(number: "x")                }
-            
+                    calculatorButton(symbol: "7")
+                    calculatorButton(symbol: "8")
+                    calculatorButton(symbol: "9")
+                    calculatorButton(symbol: "x")
+                }
                 
                 HStack {
-                    calculatorButton(number: ".")
-                    calculatorButton(number: "0")
-                    calculatorButton(number: "=")
-                    calculatorButton(number: "divided by")
-                                    }
-           
-                HStack {
-                  
-                    
+                    calculatorButton(symbol: "AC")
+                    calculatorButton(symbol: "0")
+                    calculatorButton(symbol: "/")
+                    calculatorButton(symbol: "=")
                 }
             }
-            
         }
     }
     
-    func calculatorButton(number: String) -> some View {
+    func calculatorButton(symbol: String) -> some View {
         return Button(action: {
-            print(number)
-        }) {
-            Text(number)
+            if (symbol == "AC") {
+                result = ""
+            } else {
+                result = result + symbol
+            }
+        }, label: {
+            Text(symbol)
                 .padding(15)
                 .background(Color.white)
                 .foregroundColor(.pink)
@@ -71,6 +83,7 @@ struct ContentView: View {
                 .font(.title2)
                 .cornerRadius(15)
         }
+        )
         .padding()
     }
 }
